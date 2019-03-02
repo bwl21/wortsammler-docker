@@ -1,0 +1,2 @@
+# wortsammler-docker
+dockerized Wortsammler
