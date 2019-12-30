@@ -57,6 +57,7 @@ RUN apk update && apk upgrade && apk --update add \
     ruby ruby ruby-dev ruby-irb ruby-rake ruby-io-console ruby-bigdecimal ruby-json ruby-bundler  \
     libstdc++ tzdata bash ca-certificates \
     &&  echo 'gem: --no-document' > /etc/gemrc\
+
 # from https://hub.docker.com/r/ciandt/docker-alpine-pandoc/dockerfile^\
 # install pandoc
 RUN \
@@ -68,7 +69,24 @@ RUN \
     && apk del wget ca-certificates\
     && rm /tmp/pandoc.tar.gz
 
-RUN gem install --no-ri --pre wortsammler
+# don't know exactly where i found this - got it by try/error
+RUN  apk update && apk fetch openjdk11-jre && apk add openjdk11 fontconfig
+
+# from https://github.com/miy4/docker-plantuml/blob/master/Dockerfile
+
+ENV PLANTUML_VERSION 1.2019.13
+ENV LANG en_US.UTF-8
+RUN apk add --no-cache graphviz ttf-droid ttf-droid-nonlatin curl \
+    && mkdir /app \
+    && curl -L https://sourceforge.net/projects/plantuml/files/plantuml.${PLANTUML_VERSION}.jar/download -o /app/plantuml.jar \
+    && apk del curl
+
+
+RUN  apk update && apk add graphviz  && rm -rf /var/lib/apt/lists/*
+
+
+
+RUN gem install --no-document --pre wortsammler
 
 ENTRYPOINT ["wortsammler"]
 

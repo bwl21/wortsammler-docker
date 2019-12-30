@@ -20,6 +20,13 @@ docker run --rm -v `pwd`:/workdir bwl21/wortsammler:latest bash -c "cd ZSUPP_Too
 
 ```
 
+# compiling
+
+
+`docker build -t bwl21/wortsammler . ` builds the container
+
+`docker push `bwl21/wortsammler`  push to docker hub
+
 # credits
 
 -   very small tex image ivanpondal/alpine-latex:1.1.0
