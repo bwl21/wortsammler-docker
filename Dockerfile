@@ -84,9 +84,7 @@ RUN apk add --no-cache graphviz ttf-droid ttf-droid-nonlatin curl \
 
 RUN  apk update && apk add graphviz  && rm -rf /var/lib/apt/lists/*
 
-
-
-RUN gem install --no-document --pre wortsammler
+RUN gem install --no-document wortsammler
 
 ENTRYPOINT ["wortsammler"]
 
